@@ -1,25 +1,87 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
+  imports = [
+    ./zsh.nix
+  ];
+
 secondfront.hyprland.monitors = [
   { name = "eDP-1"; width = 1920; height = 1200; refreshRate = 60; position = "1920x3134"; }
   { name = "DP-2"; width = 3840; height = 2160; refreshRate = 60; position = "0x974"; }
   { name = "DP-3"; width = 3840; height = 2160; refreshRate = 60; position = "3840x0"; }
   { name = "DP-3"; transform = true; scale = "3"; }
-];
+  ];
   home.packages = with pkgs; [
-    # twofctl
+    twofctl
+    pulumi-bin
+    nixfmt
+    base16-schemes
+    pulseaudio
+    bash
+    xarchiver
+    go
+    kubectx
+    signal-desktop
+    rustup
+    rustls-libssl
+    typescript
+    gcc
+    nodejs_24
+    openssl
+    signal-desktop
+    stern
+    cosign
+    spotify
+    dig
+    dive
+    lsof
+    brightnessctl
+    discord
+    yq-go
+    pcsc-tools
+    (pkgs.writeShellScriptBin "setup-browser-CAC" ''
+      NSSDB="''${HOME}/.pki/nssdb"
+      mkdir -p ''${NSSDB}
+
+      ${pkgs.nssTools}/bin/modutil -force -dbdir sql:$NSSDB -add yubi-smartcard \
+        -libfile ${pkgs.opensc}/lib/opensc-pkcs11.so
+    '')
   ];
 
   programs = {
     # Add packages from home Manager that you want
-    # nixcord.enable = true;
-    # nixcord.vesktop.enable = true;
-    # obs-studio.enable = true;
-    # foot.enable = true;
+    obs-studio.enable = true;
+    foot.enable = true;
+    chromium = {
+      enable = true;
+      package = pkgs.brave;
+      extensions = [
+        { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
+        { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # Darkreader
+        { id = "acacmjcicejlmjcheoklfdchempahoag"; } # JSON Lite
+        { id = "fmkadmapgofadopljbjfkapdkoienihi"; } # React Dev Tools
+        { id = "clngdbkpkpeebahjckkjfobafhncgmne"; } # Stylix
+        { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # Tampermonkey
+      ];
+      commandLineArgs = [
+        "--disable-features=AutofillSavePaymentMethods"
+      ];
+    };
   };
+  stylix = {
+    enable = true;
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+  };
+  };
+
+  programs.zed-editor.userSettings.vim_mode = lib.mkForce false;
+  programs.zed-editor.userSettings.relative_line_numbers = lib.mkForce false;
   wayland.windowManager.hyprland = {
 
     settings = {

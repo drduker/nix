@@ -16,12 +16,12 @@
     stylix.url = "github:danth/stylix";
     # SecondFront Modules and Projects
     secondfront.url = "github:tonybutt/modules";
-    # twofctl = {
-    #   type = "gitlab";
-    #   host = "code.il2.gamewarden.io";
-    #   owner = "gamewarden%2Fplatform";
-    #   repo = "2fctl";
-    # };
+    twofctl = {
+      type = "gitlab";
+      host = "code.il2.gamewarden.io";
+      owner = "gamewarden%2Fplatform";
+      repo = "2fctl";
+    };
   };
   nixConfig = {
     extra-substituters = [ "https://hyprland.cachix.org" ];
@@ -39,6 +39,7 @@
       disko,
       nixos-hardware,
       secondfront,
+      twofctl,
       ...
     }@inputs:
     let
@@ -46,7 +47,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        # overlays = [ twofctl.overlays.default ];
+        overlays = [ twofctl.overlays.default ];
       };
       user = {
         name = "lucaspick";
