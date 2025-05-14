@@ -93,6 +93,7 @@ secondfront.hyprland.monitors = [
       ];
       bind = [
         "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+        "$mainMod, escape, exec, hyprlock"
         "$mainMod, G, togglegroup"
         "$mainMod, Return, exec, kitty"
         "$mainMod, Y, exec, ykmanoath"
