@@ -1,0 +1,17 @@
+download iso:
+https://releases.ubuntu.com/24.04.2/ubuntu-24.04.2-desktop-amd64.iso
+
+if [ ! -f "/tmp/ubuntu-24.04.2-desktop-amd64.iso" ]; then
+    echo "Downloading ISO..."
+    wget -O "/tmp/ubuntu-24.04.2-desktop-amd64.iso" "https://releases.ubuntu.com/24.04.2/ubuntu-24.04.2-desktop-amd64.iso"
+else
+    echo "ISO already exists at /tmp/ubuntu-24.04.2-desktop-amd64.iso, skipping download."
+fi
+
+
+
+start and create new vm with Virtual Machine Manager:
+
+Select auto attend file from url:
+
+https://gist.githubusercontent.com/drduker/57dbfea1efdc89d439b867eb299b4885/raw/75ac7815f365ac18ff8ae755c5e91a1b85638b42/test

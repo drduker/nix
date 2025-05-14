@@ -1,18 +1,33 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
-{
-  imports = [
-    ./zsh.nix
-  ];
+{ pkgs, lib, ... }: {
+  imports = [ ./zsh.nix ./vscode.nix ./firefox.nix ];
 
-secondfront.hyprland.monitors = [
-  { name = "eDP-1"; width = 1920; height = 1200; refreshRate = 60; position = "1920x3134"; }
-  { name = "DP-2"; width = 3840; height = 2160; refreshRate = 60; position = "0x974"; }
-  { name = "DP-3"; width = 3840; height = 2160; refreshRate = 60; position = "3840x0"; }
-  { name = "DP-3"; transform = true; scale = "3"; }
+  secondfront.hyprland.monitors = [
+    {
+      name = "eDP-1";
+      width = 1920;
+      height = 1200;
+      refreshRate = 60;
+      position = "1920x3134";
+    }
+    {
+      name = "DP-2";
+      width = 3840;
+      height = 2160;
+      refreshRate = 60;
+      position = "0x974";
+    }
+    {
+      name = "DP-3";
+      width = 3840;
+      height = 2160;
+      refreshRate = 60;
+      position = "3840x0";
+    }
+    {
+      name = "DP-3";
+      transform = true;
+      scale = "3";
+    }
   ];
   home.packages = with pkgs; [
     twofctl
@@ -40,6 +55,8 @@ secondfront.hyprland.monitors = [
     lsof
     brightnessctl
     discord
+    wget
+    cloud-utils # for vm tools like cloud-localds
     yq-go
     pcsc-tools
     (pkgs.writeShellScriptBin "setup-browser-CAC" ''
@@ -66,9 +83,7 @@ secondfront.hyprland.monitors = [
         { id = "clngdbkpkpeebahjckkjfobafhncgmne"; } # Stylix
         { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # Tampermonkey
       ];
-      commandLineArgs = [
-        "--disable-features=AutofillSavePaymentMethods"
-      ];
+      commandLineArgs = [ "--disable-features=AutofillSavePaymentMethods" ];
     };
   };
   stylix = {
@@ -77,7 +92,7 @@ secondfront.hyprland.monitors = [
       package = pkgs.apple-cursor;
       name = "macOS";
       size = 24;
-  };
+    };
   };
 
   programs.zed-editor.userSettings.vim_mode = lib.mkForce false;
@@ -85,9 +100,7 @@ secondfront.hyprland.monitors = [
   wayland.windowManager.hyprland = {
 
     settings = {
-      input = {
-        natural_scroll = true;
-      };
+      input = { natural_scroll = true; };
       exec-once = [
         "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
       ];

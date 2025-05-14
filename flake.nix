@@ -16,6 +16,7 @@
     stylix.url = "github:danth/stylix";
     # SecondFront Modules and Projects
     secondfront.url = "github:tonybutt/modules";
+    nur.url = "github:nix-community/NUR";
     twofctl = {
       type = "gitlab";
       host = "code.il2.gamewarden.io";
@@ -25,29 +26,18 @@
   };
   nixConfig = {
     extra-substituters = [ "https://hyprland.cachix.org" ];
-    extra-trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-    ];
+    extra-trusted-public-keys =
+      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
-  outputs =
-    {
-      nixpkgs,
-      stylix,
-      home-manager,
-      hyprland,
-      disko,
-      nixos-hardware,
-      secondfront,
-      twofctl,
-      ...
-    }@inputs:
+  outputs = { nixpkgs, stylix, home-manager, hyprland, disko, nixos-hardware
+    , secondfront, twofctl, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ twofctl.overlays.default ];
+        overlays = [ twofctl.overlays.default nur.overlays.default ];
       };
       user = {
         name = "lucaspick";
@@ -55,15 +45,12 @@
         email = "lucas.pick@secondfront.com";
         signingkey = "798BAB8A95134264";
       };
-    in
-    {
+    in {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
       nixosConfigurations = {
         nixtop = nixpkgs.lib.nixosSystem {
           inherit pkgs system;
-          specialArgs = {
-            inherit user inputs hyprland;
-          };
+          specialArgs = { inherit user inputs hyprland; };
           modules = [
             nixos-hardware.nixosModules.dell-xps-15-9530-nvidia
             ./hosts/nixtop/configuration.nix
@@ -75,21 +62,15 @@
         # Minimal Installation ISO.
         iso = nixpkgs.lib.nixosSystem {
           inherit pkgs system;
-          specialArgs = {
-            inherit user;
-          };
+          specialArgs = { inherit user; };
 
-          modules = [
-            ./hosts/iso/configuration.nix
-          ];
+          modules = [ ./hosts/iso/configuration.nix ];
         };
       };
       homeConfigurations = {
         "${user.name}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs user;
-          };
+          extraSpecialArgs = { inherit inputs user; };
           modules = [
             ./home/home.nix
             stylix.homeManagerModules.stylix
