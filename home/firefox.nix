@@ -7,7 +7,7 @@
           inherit install_url;
         }) {
           # "${vimium.addonId}" = "${vimium.src.url}";
-          "${darkreader.addonId}" = "${darkreader.src.url}";
+          # "${darkreader.addonId}" = "${darkreader.src.url}";
           "${bitwarden.addonId}" = "${bitwarden.src.url}";
           "${ublock-origin.addonId}" = "${ublock-origin.src.url}";
           "${privacy-badger.addonId}" = "${privacy-badger.src.url}";

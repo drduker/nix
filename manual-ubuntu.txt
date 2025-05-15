@@ -15,3 +15,15 @@ start and create new vm with Virtual Machine Manager:
 Select auto attend file from url:
 
 https://gist.githubusercontent.com/drduker/57dbfea1efdc89d439b867eb299b4885/raw/75ac7815f365ac18ff8ae755c5e91a1b85638b42/test
+
+
+# CAC ready commands
+sudo snap remove --purge firefox
+
+
+sudo apt-get install -y libnss3-tools opensc-pkcs11 pcsc-tools pcscd
+# RESTART
+libFile=/usr/lib/x86_64-linux-gnu/pkcs11/opensc-pkcs11.so
+mkdir -p "$HOME/.pki/nssdb"
+certutil -d "$HOME/.pki/nssdb" -N --empty-password
+modutil -dbdir sql:"$HOME/.pki/nssdb/" -add "CAC Module" -libfile "$libFile" -force

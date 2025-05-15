@@ -56,7 +56,8 @@
     brightnessctl
     discord
     wget
-    cloud-utils # for vm tools like cloud-localds
+    # spice-vdagent # dynamic resolution for VMs
+    cloud-utils # for vm tools like cloud-localdsdl
     yq-go
     pcsc-tools
     (pkgs.writeShellScriptBin "setup-browser-CAC" ''
