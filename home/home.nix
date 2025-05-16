@@ -56,6 +56,7 @@
     brightnessctl
     discord
     wget
+    sqlite
     # spice-vdagent # dynamic resolution for VMs
     cloud-utils # for vm tools like cloud-localdsdl
     yq-go
