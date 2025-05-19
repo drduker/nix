@@ -28,6 +28,12 @@
       add = "f() { sed -i \"/home\\.packages = with pkgs; \\[/a \\ \\ \\ \\ $1\" ~/nix-config/home/home.nix; rbh; }; f";
       open = "xdg-open";
       lastMR = "curl -H \"PRIVATE-TOKEN: $(awk -F'[:@]' '/code.il2/ {print $3}' ~/.git-credentials)\" \"https://code.il2.gamewarden.io/api/v4/merge_requests?scope=all&order_by=created_at&sort=desc&per_page=1\" | jq -r '.[].web_url'";
+      no_finalizers = ''
+        for ns in $(kubectl get ns --no-headers | awk '{print $1}'); do
+          k get ns $ns -o json | jq '.spec.finalizers = []' | k replace --raw "/api/v1/namespaces/$ns/finalize" -f -;
+        done
+      '';
+
     };
   };
 }
