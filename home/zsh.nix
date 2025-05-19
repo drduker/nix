@@ -25,6 +25,7 @@
       kcu = "2fctl kubeconfig update";
       gcat = "git commit --all --template ~/.gitmessage";
       gwup = "pushd ~/workspace/govcloud && 2fctl git clone && popd";
+      add = "f() { sed -i \"/home\\.packages = with pkgs; \\[/a \\ \\ \\ \\ $1\" ~/nix-config/home/home.nix; rbh; }; f";
     };
   };
 }

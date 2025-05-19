@@ -30,6 +30,8 @@
     }
   ];
   home.packages = with pkgs; [
+    bastet
+    pong3d
     twofctl
     pulumi-bin
     nixfmt
@@ -57,6 +59,7 @@
     discord
     wget
     sqlite
+    kubeconform
     # spice-vdagent # dynamic resolution for VMs
     cloud-utils # for vm tools like cloud-localdsdl
     yq-go
