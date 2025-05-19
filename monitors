@@ -1,0 +1,19 @@
+    {
+      name = "DP-2";
+      width = 3840;
+      height = 2160;
+      refreshRate = 60;
+      position = "0x974";
+    }
+    {
+      name = "DP-3";
+      width = 3840;
+      height = 2160;
+      refreshRate = 60;
+      position = "3840x0";
+    }
+    {
+      name = "DP-3";
+      transform = true;
+      scale = "3";
+    }
