@@ -26,6 +26,8 @@
       gcat = "git commit --all --template ~/.gitmessage";
       gwup = "pushd ~/workspace/govcloud && 2fctl git clone && popd";
       add = "f() { sed -i \"/home\\.packages = with pkgs; \\[/a \\ \\ \\ \\ $1\" ~/nix-config/home/home.nix; rbh; }; f";
+      open = "xdg-open";
+      lastMR = "curl -H \"PRIVATE-TOKEN: $(awk -F'[:@]' '/code.il2/ {print $3}' ~/.git-credentials)\" \"https://code.il2.gamewarden.io/api/v4/merge_requests?scope=all&order_by=created_at&sort=desc&per_page=1\" | jq -r '.[].web_url'";
     };
   };
 }
