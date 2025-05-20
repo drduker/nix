@@ -30,6 +30,7 @@
     }
   ];
   home.packages = with pkgs; [
+    usbutils
     bastet
     pong3d
     twofctl
@@ -99,7 +100,6 @@
       size = 24;
     };
   };
-
   programs.zed-editor.userSettings.vim_mode = lib.mkForce false;
   programs.zed-editor.userSettings.relative_line_numbers = lib.mkForce false;
   wayland.windowManager.hyprland = {
