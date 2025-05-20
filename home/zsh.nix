@@ -14,6 +14,12 @@
       extended = true; # Save timestamps
     };
 
+    initExtra = ''
+      fpath=("$HOME/nix-config/scripts/completions" $fpath)
+      autoload -Uz compinit
+      compinit
+    '';
+
     shellAliases = {
       rebuild = "nh home switch $HOME/nix-config";
       pp = "pulumi";
