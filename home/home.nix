@@ -112,6 +112,7 @@
       bind = [
         "$mainMod, R, exec, xdg-open \"$(curl -H \"PRIVATE-TOKEN: $(awk -F'[:@]' '/code.il2/ {print $3}' ~/.git-credentials)\" \"https://code.il2.gamewarden.io/api/v4/merge_requests?scope=all&order_by=created_at&sort=desc&per_page=1\" | jq -r '.[].web_url')\"" # open last MR
         "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+        "$mainMod CTRL, escape, exec, systemctl suspend" 
         "$mainMod, escape, exec, hyprlock"
         "$mainMod, G, togglegroup"
         "$mainMod, Return, exec, kitty"
