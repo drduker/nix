@@ -30,6 +30,7 @@
     }
   ];
   home.packages = with pkgs; [
+    pre-commit
     usbutils
     bastet
     pong3d
@@ -52,6 +53,9 @@
     signal-desktop
     stern
     cosign
+    sops
+    kail
+    qalculate-gtk
     spotify
     dig
     dive
@@ -100,6 +104,7 @@
       size = 24;
     };
   };
+
   programs.zed-editor.userSettings.vim_mode = lib.mkForce false;
   programs.zed-editor.userSettings.relative_line_numbers = lib.mkForce false;
   wayland.windowManager.hyprland = {
