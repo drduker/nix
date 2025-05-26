@@ -30,6 +30,7 @@
     }
   ];
   home.packages = with pkgs; [
+    zip
     pre-commit
     usbutils
     bastet

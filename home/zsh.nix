@@ -39,7 +39,6 @@
           k get ns $ns -o json | jq '.spec.finalizers = []' | k replace --raw "/api/v1/namespaces/$ns/finalize" -f -;
         done
       '';
-
     };
   };
 }
