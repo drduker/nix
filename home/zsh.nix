@@ -39,6 +39,15 @@
           k get ns $ns -o json | jq '.spec.finalizers = []' | k replace --raw "/api/v1/namespaces/$ns/finalize" -f -;
         done
       '';
+      pre_suspend = ''
+        sudo bash -c '
+        for dev in /sys/bus/usb/devices/*; do
+          name=$(cat "$dev/product" 2>/dev/null)
+          if [ "$name" = "USB Receiver" ]; then
+            echo disabled | tee "$dev/power/wakeup"
+          fi
+        done'
+      '';
     };
   };
 }
