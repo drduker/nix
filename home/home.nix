@@ -29,6 +29,7 @@
       scale = "3";
     }
   ];
+
   home.packages = with pkgs; [
     zip
     pre-commit

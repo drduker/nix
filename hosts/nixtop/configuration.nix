@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -21,6 +22,8 @@
     pkgs.nerd-fonts.jetbrains-mono
     pkgs.font-awesome
   ];
+
+  time.timeZone = lib.mkForce "America/Chicago";
 
   system.stateVersion = "24.05";
   services.udev.extraRules = ''
