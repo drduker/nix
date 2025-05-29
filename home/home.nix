@@ -64,6 +64,9 @@
     lsof
     brightnessctl
     discord
+    trivy
+    grype
+    syft
     wget
     sqlite
     kubeconform
