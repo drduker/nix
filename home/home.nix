@@ -31,6 +31,8 @@
   ];
 
   home.packages = with pkgs; [
+    easyeffects
+    envsubst
     zip
     pre-commit
     usbutils
