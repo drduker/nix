@@ -88,6 +88,18 @@
   programs = {
     # Add packages from home Manager that you want
     obs-studio.enable = true;
+    kitty.settings = {
+      scrollback_lines = 100000;
+      copy_on_select = "clipboard";
+      tab_bar_edge = "left";
+      tab_bar_style = "separator";
+      tab_bar_min_tabs = 1;
+      tab_separator = " │ ";
+      active_tab_foreground = "#000";
+      active_tab_background = "#eee";
+      inactive_tab_foreground = "#444";
+      inactive_tab_background = "#999";
+    };
     foot.enable = true;
     chromium = {
       enable = true;
