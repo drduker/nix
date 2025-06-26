@@ -31,6 +31,11 @@
   ];
 
   home.packages = with pkgs; [
+    inkscape
+    gimp
+    skopeo
+    crane
+    manifest-tool
     easyeffects
     envsubst
     zip
