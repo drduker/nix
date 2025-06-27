@@ -31,6 +31,7 @@
   ];
 
   home.packages = with pkgs; [
+    cilium-cli
     inkscape
     gimp
     skopeo
