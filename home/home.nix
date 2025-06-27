@@ -1,5 +1,5 @@
-{ pkgs, lib, ... }: {
-  imports = [ ./zsh.nix ./vscode.nix ./firefox.nix ];
+{ pkgs, user, lib, ... }: {
+  imports = [ ./zsh.nix ./vscode.nix ./firefox.nix  ];
 
   secondfront.hyprland.monitors = [
     {
@@ -119,6 +119,226 @@
         { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # Tampermonkey
       ];
       commandLineArgs = [ "--disable-features=AutofillSavePaymentMethods" ];
+    };
+    k9s = {
+      plugin = {
+        network-test = {
+          shortCut = "Shift-4";
+          description = "ntwrk-util";
+          scopes = [ "pods" ];
+          command = "sh";
+          background = true;
+          args = [
+            "-c"
+            ''
+              kubectl run -it -n $NAMESPACE network-utility \
+                --image=registry1.dso.mil/ironbank/opensource/kubernetes-e2e-test/dnsutils:1.3-ubi9 \
+                --overrides='{
+                  "apiVersion": "v1",
+                  "spec": {
+                    "containers": [{
+                      "name": "network-utility",
+                      "image": "registry1.dso.mil/ironbank/opensource/kubernetes-e2e-test/dnsutils:1.3-ubi9",
+                      "command": ["/bin/bash"],
+                      "args": ["-c", "sleep 10000"],
+                      "serviceAccount": "default",
+                      "securityContext": {
+                        "capabilities": {
+                          "drop": ["ALL"]
+                        }
+                      }
+                    }],
+                    "imagePullSecrets": [{
+                      "name": "private-registry"
+                    }]
+                  }
+                }' \
+                --command -- bash
+            ''
+          ];
+        };
+
+        aws-cli = {
+          shortCut = "Shift-3";
+          description = "aws-cli";
+          scopes = [ "pods" ];
+          command = "sh";
+          background = true;
+          args = [
+            "-c"
+            ''
+              kubectl run -it -n $NAMESPACE aws-cli \
+                --image=registry1.dso.mil/ironbank/opensource/amazon/aws-cli:2.11.2 \
+                --overrides='{
+                  "apiVersion": "v1",
+                  "spec": {
+                    "containers": [{
+                      "name": "aws-cli",
+                      "image": "registry1.dso.mil/ironbank/opensource/amazon/aws-cli:2.11.2",
+                      "command": ["/bin/bash"],
+                      "args": ["-c", "sleep 10000"],
+                      "serviceAccount": "default",
+                      "securityContext": {
+                        "runAsUser": 1001,
+                        "runAsGroup": 1001,
+                        "fsGroup": 1001,
+                        "capabilities": {
+                          "drop": ["ALL"]
+                        }
+                      }
+                    }],
+                    "imagePullSecrets": [{
+                      "name": "private-registry"
+                    }]
+                  }
+                }' \
+                --command -- bash
+            ''
+          ];
+        };
+        psql-client = {
+          shortCut = "Shift-1";
+          description = "psql";
+          scopes = [ "pods" ];
+          command = "sh";
+          background = true;
+          args = [
+            "-c"
+            ''
+              kubectl run -it -n $NAMESPACE psql-client \
+                --image=registry.gamewarden.io/ironbank-proxy/ironbank/bitnami/postgres:16.3.0 \
+                --overrides='{
+                  "apiVersion": "v1",
+                  "spec": {
+                    "containers": [{
+                      "name": "psql-client",
+                      "image": "registry.gamewarden.io/ironbank-proxy/ironbank/bitnami/postgres:16.3.0",
+                      "command": ["/bin/bash"],
+                      "args": ["-c", "sleep 10000"],
+                      "serviceAccount": "default",
+                      "env": [
+                        {
+                          "name": "POSTGRES_USER",
+                          "value": "DBAdmin"
+                        },
+                        {
+                          "name": "DATABASE_URL",
+                          "valueFrom": {
+                            "secretKeyRef": {
+                              "name": "app-secrets",
+                              "key": "DATABASE_URL",
+                              "optional": true
+                            }
+                          }
+                        },
+                        {
+                          "name": "PGPASSWORD",
+                          "valueFrom": {
+                            "secretKeyRef": {
+                              "name": "generated-secrets",
+                              "key": "GENERATED_DB_PASSWORD",
+                              "optional": true
+                            }
+                          }
+                        },
+                        {
+                          "name": "PGPASSWORD",
+                          "valueFrom": {
+                            "secretKeyRef": {
+                              "name": "$NAMESPACE",
+                              "key": "DB_PASSWORD",
+                              "optional": true
+                            }
+                          }
+                        },
+                        {
+                          "name": "PGPASSWORD",
+                          "valueFrom": {
+                            "secretKeyRef": {
+                              "name": "$NAMESPACE",
+                              "key": "DATABASE_PASSWORD",
+                              "optional": true
+                            }
+                          }
+                        }
+                      ],
+                      "securityContext": {
+                        "capabilities": {
+                          "drop": ["ALL"]
+                        }
+                      }
+                    }],
+                    "imagePullSecrets": [{
+                      "name": "private-registry"
+                    }]
+                  }
+                }' \
+                --command -- bash
+            ''
+          ];
+        };
+        mysql-client = {
+          shortCut = "Shift-2";
+          description = "mysql-client";
+          scopes = [ "pods" ];
+          command = "sh";
+          background = true;
+          args = [
+            "-c"
+            ''
+              kubectl run -it -n $NAMESPACE mysql-client \
+                --image=registry1.dso.mil/ironbank/opensource/mysql/mysql8:8.0.29 \
+                --overrides='{
+                  "apiVersion": "v1",
+                  "spec": {
+                    "containers": [{
+                      "name": "mysql-client",
+                      "image": "registry1.dso.mil/ironbank/opensource/mysql/mysql8:8.0.29",
+                      "command": ["/bin/bash"],
+                      "args": ["-c", "sleep 10000"],
+                      "serviceAccount": "default",
+                      "env": [
+                        {
+                          "name": "MYSQL_PASSWORD",
+                          "valueFrom": {
+                            "secretKeyRef": {
+                              "name": "$NAMESPACE",
+                              "key": "MYSQL_PASSWORD",
+                              "optional": true
+                            }
+                          }
+                        },
+                        {
+                          "name": "MYSQL_USER",
+                          "value": "DBAdmin"
+                        }
+                      ],
+                      "securityContext": {
+                        "capabilities": {
+                          "drop": ["ALL"]
+                        }
+                      }
+                    }],
+                    "imagePullSecrets": [{
+                      "name": "private-registry"
+                    }]
+                  }
+                }' \
+                --command -- bash
+            ''
+          ];
+        };
+      };
+      views = {
+        "kustomize.toolkit.fluxcd.io/v1/kustomizations" = {
+          columns =
+            [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
+        };
+        "helm.toolkit.fluxcd.io/v2/helmreleases" = {
+          columns =
+            [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
+        };
+      };
     };
   };
   stylix = {
