@@ -30,7 +30,10 @@
     }
   ];
 
+
   home.packages = with pkgs; [
+    talhelper
+    talosctl
     cilium-cli
     inkscape
     gimp
@@ -90,10 +93,13 @@
         -libfile ${pkgs.opensc}/lib/opensc-pkcs11.so
     '')
   ];
+  programs.git.extraConfig.credential.helper = lib.mkForce "";
+  programs.git.extraConfig.push.autoSetupRemote = lib.mkForce "true";
 
   programs = {
     # Add packages from home Manager that you want
     obs-studio.enable = true;
+
     kitty.settings = {
       scrollback_lines = 100000;
       copy_on_select = "clipboard";
