@@ -127,6 +127,11 @@
       commandLineArgs = [ "--disable-features=AutofillSavePaymentMethods" ];
     };
     k9s = {
+      enable = true;
+      settings.k9s.ui.skin = "skin";
+      settings.k9s.ui.logoless = true;
+      settings.k9s.body.logoUrl = "https://raw.githubusercontent.com/AoKoori/k9s/refs/heads/Feature/dynamic-logo-from-skin/assets/dev.txt";
+      skins.skin.k9s.body.logoUrl = "https://raw.githubusercontent.com/AoKoori/k9s/refs/heads/Feature/dynamic-logo-from-skin/assets/dev.txt";
       views = {
         views = {
           "ks" = {
