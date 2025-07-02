@@ -127,6 +127,29 @@
       commandLineArgs = [ "--disable-features=AutofillSavePaymentMethods" ];
     };
     k9s = {
+      views = {
+        views = {
+          "ks" = {
+            columns =
+              [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
+          };
+          "hr" = {
+            columns =
+              [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
+          };
+          "v1/nodes" = {
+            columns = [
+              "AGE"
+              "STATUS"
+              "NAME:.status.addresses[0].address"
+              "VERSION|S"
+              "POO:.metadata.labels.karpenter\\.sh/nodepool"
+              "ROLE|H"
+              "TAINT1:.spec.taints[0].key"
+            ];
+          };
+        };
+      };
       plugin = {
         network-test = {
           shortCut = "Shift-4";
@@ -333,16 +356,6 @@
                 --command -- bash
             ''
           ];
-        };
-      };
-      views = {
-        "kustomize.toolkit.fluxcd.io/v1/kustomizations" = {
-          columns =
-            [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
-        };
-        "helm.toolkit.fluxcd.io/v2/helmreleases" = {
-          columns =
-            [ "NAMESPACE" "NAME" "SUS:.spec.suspend" "READY" "STATUS" "AGE" ];
         };
       };
     };
