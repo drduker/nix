@@ -129,9 +129,9 @@
     k9s = {
       enable = true;
       settings.k9s.ui.skin = "skin";
-      settings.k9s.ui.logoless = true;
-      settings.k9s.body.logoUrl = "https://raw.githubusercontent.com/AoKoori/k9s/refs/heads/Feature/dynamic-logo-from-skin/assets/dev.txt";
-      skins.skin.k9s.body.logoUrl = "https://raw.githubusercontent.com/AoKoori/k9s/refs/heads/Feature/dynamic-logo-from-skin/assets/dev.txt";
+      settings.k9s.ui.logoless = false;
+      settings.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/9fcdfac7782e70897cc3e32af5f49c26/raw/db7f6b4786f1cb197356fc42057dd6b65be37649/jet";
+      skins.skin.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/9fcdfac7782e70897cc3e32af5f49c26/raw/db7f6b4786f1cb197356fc42057dd6b65be37649/jet";
       views = {
         views = {
           "ks" = {
