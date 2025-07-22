@@ -32,6 +32,7 @@
 
 
   home.packages = with pkgs; [
+    rpi-imager
     talhelper
     talosctl
     cilium-cli
@@ -189,6 +190,21 @@
                 }' \
                 --command -- bash
             ''
+          ];
+        };
+
+        add-delete-label = {
+          shortCut = "Ctrl-L";
+          description = "add-delete-label";
+          scopes = [ "all" ];
+          command = "kubectl";
+          background = true;
+          args = [
+          "label"
+          "-n"
+          "$NAMESPACE"
+          "$RESOURCE_NAME/$NAME"
+          "delete=allow"
           ];
         };
 
