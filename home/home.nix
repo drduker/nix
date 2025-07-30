@@ -32,6 +32,11 @@
 
 
   home.packages = with pkgs; [
+    lutris
+    openvpn
+    cmake
+    python313Packages.pip
+    python314
     rpi-imager
     talhelper
     talosctl
