@@ -30,4 +30,18 @@
     ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="0x046d" ATTR{device}=="0xc547" ATTR{power/wakeup}="disabled"
   '';
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  environment.systemPackages = with pkgs; [
+    keyd
+  ];
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      settings = {
+        main = {
+          insert = "pause";  # remap Insert to Pause
+        };
+      };
+    };
+  };
 }

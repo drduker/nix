@@ -467,6 +467,7 @@
         '', Print, exec, grim -g "$(slurp)" - | swappy -f -''
         "$mainMod, B, exec, pkill -SIGUSR1 waybar"
         "$mainMod, W, exec, pkill -SIGUSR2 waybar"
+        "$mainMod, KP_5, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
       ];
       bindm = [
         "$mainMod, mouse:272, movewindow"
