@@ -31,17 +31,4 @@
   '';
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  environment.systemPackages = with pkgs; [
-    keyd
-  ];
-  services.keyd = {
-    enable = true;
-    keyboards.default = {
-      settings = {
-        main = {
-          insert = "pause";  # remap Insert to Pause
-        };
-      };
-    };
-  };
 }

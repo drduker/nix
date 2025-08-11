@@ -38,7 +38,6 @@
     python313Packages.pip
     python314
     rpi-imager
-    talhelper
     talosctl
     cilium-cli
     inkscape
@@ -161,7 +160,7 @@
           };
         };
       };
-      plugin = {
+      plugins = {
         network-test = {
           shortCut = "Shift-4";
           description = "ntwrk-util";
@@ -405,6 +404,7 @@
         "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
       ];
       bind = [
+        ", Insert, exec, sh -c 'pactl play-sample fart'"
         "$mainMod, R, exec, xdg-open \"$(curl -H \"PRIVATE-TOKEN: $(awk -F'[:@]' '/code.il2/ {print $3}' ~/.git-credentials)\" \"https://code.il2.gamewarden.io/api/v4/merge_requests?scope=all&order_by=created_at&sort=desc&per_page=1\" | jq -r '.[].web_url')\"" # open last MR
         "$mainMod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
         "$mainMod CTRL, escape, exec, systemctl suspend" 
@@ -468,6 +468,7 @@
         "$mainMod, B, exec, pkill -SIGUSR1 waybar"
         "$mainMod, W, exec, pkill -SIGUSR2 waybar"
         "$mainMod, KP_5, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+
       ];
       bindm = [
         "$mainMod, mouse:272, movewindow"

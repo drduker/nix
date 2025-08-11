@@ -23,7 +23,6 @@
       owner = "gamewarden%2Fplatform";
       repo = "2fctl";
     };
-    talhelper.url = "github:budimanjojo/talhelper";
   };
   nixConfig = {
     extra-substituters = [ "https://hyprland.cachix.org" ];
@@ -38,7 +37,7 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ twofctl.overlays.default nur.overlays.default inputs.talhelper.overlays.default ];
+        overlays = [ twofctl.overlays.default nur.overlays.default ];
       };
       user = {
         name = "lucaspick";
