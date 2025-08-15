@@ -30,7 +30,6 @@
     }
   ];
 
-
   home.packages = with pkgs; [
     lutris
     openvpn
@@ -137,6 +136,8 @@
       settings.k9s.ui.logoless = false;
       settings.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/9fcdfac7782e70897cc3e32af5f49c26/raw/db7f6b4786f1cb197356fc42057dd6b65be37649/jet";
       skins.skin.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/9fcdfac7782e70897cc3e32af5f49c26/raw/db7f6b4786f1cb197356fc42057dd6b65be37649/jet";
+#      settings.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/dea7db00f7a5efa131d029b75099b7a2/raw/102e48d2063b773e332b34c6b661bc0238d861d5/gistfile1.txt";
+#      skins.skin.k9s.body.logoUrl = "https://gist.githubusercontent.com/drduker/dea7db00f7a5efa131d029b75099b7a2/raw/102e48d2063b773e332b34c6b661bc0238d861d5/gistfile1.txt";
       views = {
         views = {
           "ks" = {
@@ -179,7 +180,7 @@
                       "name": "network-utility",
                       "image": "registry1.dso.mil/ironbank/opensource/kubernetes-e2e-test/dnsutils:1.3-ubi9",
                       "command": ["/bin/bash"],
-                      "args": ["-c", "sleep 10000"],
+                      "args": ["-c", "echo Running network connectivity checks...; run_check() { local cmd=$1; local desc=$2; echo -n \"Checking $desc...\"; eval $cmd >/dev/null 2>&1; local rc=$?; if [ $rc -eq 0 ]; then echo \"✓ (rc=$rc)\"; else echo \"✗ (rc=$rc)\"; fi; }; run_check \"nslookup kubernetes.default.svc.cluster.local\" \"k8s DNS\"; run_check \"nslookup s3.us-gov-east-1.amazonaws.com\" \"S3 Gov East DNS\"; run_check \"nslookup s3.us-east-1.amazonaws.com\" \"S3 East DNS\"; run_check \"curl -v --max-time 10 http://istiod.istio-system.svc.cluster.local:15012/ready\" \"Istio ready\"; run_check \"curl -sk --max-time 30 https://kubernetes.default.svc.cluster.local:443/healthz\" \"K8s API health\"; run_check \"curl -v --max-time 10 https://s3.us-gov-east-1.amazonaws.com\" \"S3 Gov East\"; run_check \"curl -v --max-time 10 https://sts.us-gov-east-1.amazonaws.com/\" \"STS Gov East\"; run_check \"curl -v --max-time 10 https://apple.com\" \"Apple.com connectivity\"; sleep 1800"],
                       "serviceAccount": "default",
                       "securityContext": {
                         "capabilities": {
@@ -192,7 +193,7 @@
                     }]
                   }
                 }' \
-                --command -- bash
+                --rm -- bash &
             ''
           ];
         };
@@ -230,7 +231,7 @@
                       "name": "aws-cli",
                       "image": "registry1.dso.mil/ironbank/opensource/amazon/aws-cli:2.11.2",
                       "command": ["/bin/bash"],
-                      "args": ["-c", "sleep 10000"],
+                      "args": ["-c", "sleep 1800"],
                       "serviceAccount": "default",
                       "securityContext": {
                         "runAsUser": 1001,
@@ -246,7 +247,7 @@
                     }]
                   }
                 }' \
-                --command -- bash
+                --command -- bash &
             ''
           ];
         };
@@ -268,7 +269,7 @@
                       "name": "psql-client",
                       "image": "registry.gamewarden.io/ironbank-proxy/ironbank/bitnami/postgres:16.3.0",
                       "command": ["/bin/bash"],
-                      "args": ["-c", "sleep 10000"],
+                      "args": ["-c", "sleep 1800"],
                       "serviceAccount": "default",
                       "env": [
                         {
@@ -327,7 +328,7 @@
                     }]
                   }
                 }' \
-                --command -- bash
+                --command -- bash &
             ''
           ];
         };
@@ -349,7 +350,7 @@
                       "name": "mysql-client",
                       "image": "registry1.dso.mil/ironbank/opensource/mysql/mysql8:8.0.29",
                       "command": ["/bin/bash"],
-                      "args": ["-c", "sleep 10000"],
+                      "args": ["-c", "sleep 1800"],
                       "serviceAccount": "default",
                       "env": [
                         {
@@ -378,7 +379,7 @@
                     }]
                   }
                 }' \
-                --command -- bash
+                --command -- bash &
             ''
           ];
         };

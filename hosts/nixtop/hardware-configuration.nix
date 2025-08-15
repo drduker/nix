@@ -21,6 +21,9 @@
   # networking.interfaces.enp0s13f0u1u3.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
+  networking.hosts = {
+    "127.0.0.1" = [ "ipfs" "ipfs.demo ];
+  };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
