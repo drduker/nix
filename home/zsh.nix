@@ -14,7 +14,7 @@
       extended = true; # Save timestamps
     };
 
-    initExtra = ''
+    initContent = ''
       fpath=("$HOME/nix-config/scripts/completions" $fpath)
       autoload -Uz compinit
       compinit
