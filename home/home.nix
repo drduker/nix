@@ -1,5 +1,5 @@
 { pkgs, user, lib, ... }: {
-  imports = [ ./zsh.nix ./vscode.nix ./firefox.nix ./k9s.nix  ];
+  imports = [ ./zsh.nix ./vscode.nix ./firefox.nix ./k9s.nix ./obs.nix ];
 
   secondfront.hyprland.monitors = [
     {
