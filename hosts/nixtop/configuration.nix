@@ -26,6 +26,7 @@
   time.timeZone = lib.mkForce "America/Chicago";
 
   system.stateVersion = "24.05";
+  services.opensnitch.enable = true;
   services.udev.extraRules = ''
     ACTION=="add" SUBSYSTEM=="pci" ATTR{vendor}=="0x046d" ATTR{device}=="0xc547" ATTR{power/wakeup}="disabled"
   '';
