@@ -19,7 +19,10 @@
   ];
 
   home.packages = with pkgs; [
+    opensnitch-ui
     libreoffice
+    ffmpeg
+    vlc
     input-leap
     opensnitch-ui
     libreoffice
