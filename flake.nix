@@ -17,12 +17,6 @@
     # SecondFront Modules and Projects
     secondfront.url = "github:tonybutt/modules";
     nur.url = "github:nix-community/NUR";
-    twofctl = {
-      type = "gitlab";
-      host = "code.il2.gamewarden.io";
-      owner = "gamewarden%2Fplatform";
-      repo = "2fctl";
-    };
   };
   nixConfig = {
     extra-substituters = [ "https://hyprland.cachix.org" ];
@@ -31,13 +25,13 @@
   };
 
   outputs = { nixpkgs, stylix, home-manager, hyprland, disko, nixos-hardware
-    , secondfront, twofctl, nur, ... }@inputs:
+    , secondfront, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ twofctl.overlays.default nur.overlays.default ];
+        overlays = [ nur.overlays.default ];
       };
       user = {
         name = "lucaspick";

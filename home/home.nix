@@ -1,36 +1,26 @@
 { pkgs, user, lib, ... }: {
   imports = [ ./zsh.nix ./vscode.nix ./firefox.nix ./k9s.nix ./obs.nix ];
-
+  
   secondfront.hyprland.monitors = [
     {
       name = "eDP-1";
       width = 1920;
-      height = 1200;
-      refreshRate = 60;
-      position = "1920x3134";
+      height = 1080;
+      refreshRate = 144;
+      position = "0x2160";
     }
     {
-      name = "DP-2";
+      name = "DP-1";
       width = 3840;
       height = 2160;
       refreshRate = 60;
-      position = "0x974";
-    }
-    {
-      name = "DP-3";
-      width = 3840;
-      height = 2160;
-      refreshRate = 60;
-      position = "3840x0";
-    }
-    {
-      name = "DP-3";
-      transform = true;
-      scale = "3";
+      position = "0x0";
     }
   ];
 
   home.packages = with pkgs; [
+    libreoffice
+    input-leap
     opensnitch-ui
     libreoffice
     ffmpeg
@@ -56,7 +46,6 @@
     usbutils
     bastet
     pong3d
-    twofctl
     pulumi-bin
     nixfmt
     base16-schemes

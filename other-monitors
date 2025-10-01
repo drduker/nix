@@ -1,0 +1,16 @@
+  secondfront.hyprland.monitors = [
+    {
+      name = "eDP-1";
+      width = 1920;
+      height = 1080;
+      refreshRate = 144;
+      position = "0x2160";
+    }
+    {
+      name = "DP-1";
+      width = 3840;
+      height = 2160;
+      refreshRate = 60;
+      position = "0x0";
+    }
+  ];
