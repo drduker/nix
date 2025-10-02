@@ -36,8 +36,8 @@
       user = {
         name = "lucaspick";
         fullName = "Lucas Pick";
-        email = "lucas.pick@secondfront.com";
-        signingkey = "798BAB8A95134264";
+        email = "lucaspick@gmail.com";
+        signingkey = "9C593CE0E9FB8676";
       };
     in {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;

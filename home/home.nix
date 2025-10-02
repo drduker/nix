@@ -19,7 +19,6 @@
   ];
 
   home.packages = with pkgs; [
-    opensnitch-ui
     libreoffice
     ffmpeg
     vlc
