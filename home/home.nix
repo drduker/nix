@@ -142,6 +142,11 @@
 
     settings = {
       input = { natural_scroll = true; };
+      gestures = lib.mkForce {
+          workspace_swipe_invert = false;
+          workspace_swipe_distance = 200;
+          workspace_swipe_forever = true;
+      };
       exec-once = [
         "systemctl --user import-environment PATH && systemctl --user restart xdg-desktop-portal.service"
       ];
